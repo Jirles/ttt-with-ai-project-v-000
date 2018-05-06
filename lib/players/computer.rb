@@ -57,7 +57,17 @@ module Players
       end 
     end 
 
-    #determining opponent_token is necessary for move-choosing-methods block? and win_imminent?
+    def choose_best_move(hash)
+      max_moves = 0
+      best_available = 0
+      hash.each do |k,v|
+        if v > max_moves
+          max_moves = v
+          best_available = k
+        end 
+      end 
+      index_to_move(best_available)               
+    end
 
     #CENTER has most WIN_COMBINATIONS but if it is taken, an opposing token in one of the CORNERS will ensure a cat's game or possibly a win with a stupid enough opponent
     def first_move(board)
