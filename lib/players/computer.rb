@@ -4,19 +4,19 @@ module Players
   class Computer < Player
     
     attr_accessor :cheat_sheet 
-    attr_reader :level_of_difficulty, :opponent_token
+    attr_reader :token, :level_of_difficulty, :opponent_token
     
    # WIN_HASH = {"1"=>3, "2"=>2, "3"=>3, "4"=>2, "5"=>4, "6"=>2, "7"=>3, "8"=>2, "9"=>3}
     CENTER = "5"
     CORNERS = ["1", "3", "7", "9"]
 
-    def initialize(level_of_difficulty=2)
+    def initialize(level_of_difficulty=2, token)
       super
       @cheat_sheet = [["1","2","3"], ["4","5","6"], ["7","8","9"], ["1","4","7"], ["2","5","8"], ["3","6","9"], ["1","5","9"], ["3","5","7"]] #=> copy of WIN_COMBINATIONS but as valid moves 
       
       #determines if you play stupid computer (random sampling) or ai 
       @level_of_difficulty = level_of_difficulty
-      #@token = token 
+      @token = token 
       case 
         when token ==  "X"
           @opponent_token = "O"
