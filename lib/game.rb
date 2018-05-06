@@ -54,7 +54,7 @@ class Game
   # returns currently player based on number of turns already taken 
   # board object tracks turns already taken 
   def current_player
-    self.board.turn_count.even? ? self.player_1 : self.player_2
+    board.turn_count.even? ? player_1 : player_2
   end
 
   # Validation methods:
