@@ -112,4 +112,7 @@ module Players
   
 end
 
-ai_move([])
+computer = PLayers::Computer.new("O")
+board = Board.new
+board.cells = [" ", " ", "O", " ", "X", "X", " ", " ", " "]
+ai_move(board)
