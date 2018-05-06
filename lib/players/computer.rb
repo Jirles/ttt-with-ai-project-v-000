@@ -107,17 +107,19 @@ module Players
     
     def ai_move(board)
      cheat_sheet = create_cheat_sheet(board)
-      if board.turn_count == 0 || board.turn_count == 1
-        first_move(board)
+      #if board.turn_count == 0 || board.turn_count == 1
+       # first_move(board)
+     # else
+      if win_imminent?(cheat_sheet)
+          win_imminent?(cheat_sheet).detect{|x| x != token}
+      elsif block?(cheat_sheet) 
+          block?(cheat_sheet).detect{|x| x != opponent_token}
       else
-        if win_imminent?(cheat_sheet)
-            win_imminent?(cheat_sheet).detect{|x| x != token}
-        elsif block?(cheat_sheet) 
-            block?(cheat_sheet).detect{|x| x != opponent_token}
-        else
-            random_move(board)
-        end
+          hash = create_updated_win_hash(board)
+          choose_best_move(hash)
+          #random_move(board)
       end
+      #end
     end
     
     def move(board)
