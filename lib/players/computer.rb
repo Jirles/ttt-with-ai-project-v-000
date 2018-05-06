@@ -81,7 +81,7 @@ module Players
     end
     
     def ai_move(board)
-      create_cheat_sheet(board)
+     cheat_sheet = create_cheat_sheet(board)
       if board.turn_count == 0 || board.turn_count == 1
         first_move(board)
       else
@@ -92,7 +92,6 @@ module Players
         else
             random_move(board)
         end
-        binding.pry 
       end
     end
     
