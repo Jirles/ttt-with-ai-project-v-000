@@ -59,9 +59,12 @@ module Players
     end 
     
     def create_updated_win_hash(board)
-      WIN_COUNTS.collect do |k, v|
-        if board.cells[k] == " "
-      end
+      Hash.new.tap do |new_hash|
+        WIN_COUNTS.each do |k, v|
+          if board.cells[k] == token || board.cells[k] == opponent_token
+            
+          end
+        end
     end
     
     def choose_best_move(hash)
