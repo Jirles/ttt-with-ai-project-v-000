@@ -39,13 +39,17 @@ module Players
       (1..9).to_a.sample.to_s
     end
     
-    # begin smart computer (2) methods - not passing tests
+    # begin smart computer (2) methods - passes
+    
+    def index_to_move(index)
+      (index + 1).to_s 
+    end
     
     def create_cheat_sheet(board)
         WIN_COMBINATIONS.collect do |combo|
         combo.collect do |index|
           if board.cells[index] == " "
-            (index + 1).to_s
+            index_to_move(index)
           else
             board.cells[index] 
           end 
