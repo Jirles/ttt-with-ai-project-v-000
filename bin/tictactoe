@@ -2,4 +2,5 @@
 
 require_relative '../config/environment'
 
+puts "Please choose
 Game.start 
