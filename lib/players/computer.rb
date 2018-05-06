@@ -10,7 +10,7 @@ module Players
     CENTER = "5"
     CORNERS = ["1", "3", "7", "9"]
 
-    def initialize(level_of_difficulty=2, token)
+    def initialize(level_of_difficulty=2)
       super
       @cheat_sheet = [["1","2","3"], ["4","5","6"], ["7","8","9"], ["1","4","7"], ["2","5","8"], ["3","6","9"], ["1","5","9"], ["3","5","7"]] #=> copy of WIN_COMBINATIONS but as valid moves 
       
