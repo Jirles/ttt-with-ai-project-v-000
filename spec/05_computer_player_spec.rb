@@ -21,32 +21,8 @@ describe 'Players::Computer' do
     end
   end
 
-  describe 'cheat_sheet' do
-    it 'initializes on a new instance of Computer composed of strings, 1-9' do
-      expected_values = [["1", "2", "3"], ["4", "5", "6"], ["7", "8", "9"], ["1", "4", "7"], ["2", "5", "8"], ["3", "6", "9"], ["1", "5", "9"], ["3", "5", "7"]]
-    
-      expect(computer.cheat_sheet).to eq(expected_values)
-    end
-  end
-
-  describe "cheat_sheet=" do 
-    it "assigns a new value to the computer.cheat_sheet property" do 
-      assigned_value = [["1","2","O"], 
-               ["X","X","6"], 
-               ["7","8","9"], 
-               ["1","X","7"], 
-               ["2","X","8"], 
-               ["O","6","9"], 
-               ["1","X","9"], 
-               ["O","X","7"]]
-      computer.cheat_sheet = assigned_value
-      
-      expect(computer.cheat_sheet).to eq(assigned_value)
-    end
-  end
-
-  describe '#update_cheat_sheet' do
-    it 'updates computer.cheat_sheet by filling in occupied spaces with the appropriate token' do
+  describe '#create_cheat_sheet' do
+    it 'creates a cheat_sheet by filling in occupied spaces with the appropriate token' do
       board.cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "]
       turn1 = [["1","2","3"], 
                ["4","X","6"], 
