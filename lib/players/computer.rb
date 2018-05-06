@@ -18,7 +18,7 @@ module Players
       @level_of_difficulty = level_of_difficulty
       @token = token 
       case 
-        when token ==  "X"
+        when self.token ==  "X"
           @opponent_token = "O"
         else
           @opponent_token = "X"
