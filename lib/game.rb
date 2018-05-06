@@ -125,14 +125,16 @@ class Game
   
   def war
     war_log = {x: 0, o: 0, cat: 0}
-    10.times do 
-      until over?
-        turn
+    3.times do
+      game = Game.new(player_1=Players::Computer.new('X'), player_2=Players::Computer.new('O'))
+      until game.over?
+        game.turn
       end
-      if won?
-      war_log[winner.downcase.to]
-    else
-      war_log[:cat] += 1
+      if game.won?
+        war_log[winner.downcase.to_sym] += 1
+      else
+        war_log[:cat] += 1
+      end
     end
     war_log
   end
