@@ -48,6 +48,7 @@ class Game
   end
   
   def self.war
+    war_quotes = ["Cry 'Havoc!', and let slip the dogs of war", ]
     war_log = {x: 0, o: 0, cat: 0}
     3.times do
       game = Game.new(player_1=Players::Computer.new('X'), player_2=Players::Computer.new('O'))
