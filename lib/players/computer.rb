@@ -70,7 +70,7 @@ module Players
     #determines if a win is imminent, i.e. there is a WIN_COMBINATION with two spaces taken by sef.token and an empty space (will be an integer on cheat_sheet)
 
   def win_imminent?
-    cheat_sheet.collect do |combo| 
+    cheat_sheet.detect do |combo| 
       combo.count{|space| space == token} == 2 && !combo.include?(opponent_token)
     end
   end
@@ -78,7 +78,7 @@ module Players
     # uses cheat_sheet and determines if a block is necessary if a combo contains two opponent_tokens 
     
     def block?
-      cheat_sheet.collect do |combo| 
+      cheat_sheet.detect do |combo| 
         combo.count{|space| space == opponent_token} == 2 && !combo.include?(token)
       end
     end
