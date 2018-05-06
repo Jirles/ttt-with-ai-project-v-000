@@ -28,8 +28,6 @@ class Game
       player_num = choose_player 
       if player_num == "0"
         game = Game.new(player_1=Players::Computer.new('X'), player_2=Players::Computer.new('O'))
-      elsif player_num = "wargames"
-        
       elsif player_num == "1"
         puts "Who will go first? Press c for the computer or h for human."
         player1 = gets.chomp 
@@ -124,21 +122,6 @@ class Game
       puts "Cat's Game!"
     end
   end
-  
-  def self.war
-    war_log = {x: 0, o: 0, cat: 0}
-    3.times do
-      game = Game.new(player_1=Players::Computer.new('X'), player_2=Players::Computer.new('O'))
-      until game.over?
-        game.turn
-      end
-      if game.won?
-        war_log[winner.downcase.to_sym] += 1
-      else
-        war_log[:cat] += 1
-      end
-    end
-    puts war_log
-  end
+
 
 end
