@@ -3,6 +3,11 @@
 require_relative '../config/environment'
 
 puts "Welcome to TicTacToe!"
-puts "Would you to like to play multi-player mode?"
-puts "or 
-Game.start 
+puts "Would you to like to play in Standard Mode or Wargames Mode?"
+puts "Select standard or wargames."
+input = gets.chomp
+if input == "wargames"
+  Game.war 
+else
+  Game.start 
+end
