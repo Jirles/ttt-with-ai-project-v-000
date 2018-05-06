@@ -62,7 +62,7 @@ module Players
       Hash.new.tap do |new_hash|
         WIN_COUNTS.each do |k, v|
           if board.cells[k] == token || board.cells[k] == opponent_token
-            
+            new_hash[k] = v 
           end
         end
       end
