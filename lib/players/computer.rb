@@ -1,3 +1,4 @@
+require "pry"
 module Players
 
   class Computer < Player
@@ -95,6 +96,7 @@ module Players
         else
             random_move(board)
         end
+        binding.pry 
       end
     end
     
@@ -109,3 +111,5 @@ module Players
   end
   
 end
+
+ai_move([])
