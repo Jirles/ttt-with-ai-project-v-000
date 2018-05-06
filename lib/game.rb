@@ -64,7 +64,7 @@ class Game
   end
   
   # #Game.start helper methods 
-  def choose_player
+  def self.choose_player
     valid_choices = ["0", "1", "2", "wargames"]
     player_num = "-1"
     puts "How many players?"
