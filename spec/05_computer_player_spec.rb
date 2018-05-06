@@ -167,20 +167,20 @@ describe 'Players::Computer' do
     end
   end
 
-  describe "#ai_move" do 
+  describe "#move" do 
     it "returns a valid move" do 
       valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
       board.cells = ["X", " ", "O", "O", " ", "X", " ", " ", " "]
     
-      expect(valid_moves).to include(computer.ai_move(board))
+      expect(valid_moves).to include(computer.move(board))
     end
   end
   
-   describe "#ai_move" do 
+   describe "#move" do 
     it "if not the first turn, it first checks for a win through #win_imminent? and returns a valid move" do
       board.cells = ["X", " ", "O", "O", "X", " ", " ", " ", " "]
       
-      expect(computer.ai_move(board)).to eq("9")
+      expect(computer.move(board)).to eq("9")
     end
     
     it "then checks if a block is needed through #block?" do 
@@ -188,7 +188,7 @@ describe 'Players::Computer' do
       board.cells = ["X", " ", "O", " ", "X", " ", " ", " ", " "]
       
       expect(computer_o.opponent_token).to eq("X")
-      expect(computer_o.ai_move(board)).to eq("9")
+      expect(computer_o.move(board)).to eq("9")
     end
   end
   
