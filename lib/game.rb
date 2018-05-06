@@ -25,10 +25,7 @@ class Game
     while play
       puts "Welcome to TicTacToe!"
       puts "How many players?"
-      puts "Please enter 0 for a 0-player game, where the computer plays itself,"
-      puts "Please enter 1 to play against the computer."
-      puts "Please enter 2 to play against a friend."
-      player_num = gets.chomp 
+      player_num = choose_player 
       if player_num == "0"
         game = Game.new(player_1=Players::Computer.new('X'), player_2=Players::Computer.new('O'))
       elsif player_num == "1"
@@ -51,6 +48,21 @@ class Game
     puts "Buh bye!"
   end
   
+  # #Game.start helper methods 
+  def choose_player
+    valid_choices = ["0", "1", "2"]
+    player_num = "-1"
+    puts "How many players?"
+    until valid_choices.include?(player_num)
+      puts "Please enter 1, for one-player mode, 2 for two-player mode,"
+      puts "or 0 for the computer to play itself."
+      player_num = gets.chomp
+    end
+    player_num
+  end
+      
+      
+      
   # returns currently player based on number of turns already taken 
   # board object tracks turns already taken 
   def current_player
@@ -63,7 +75,7 @@ class Game
   def won?
     winner = nil
     WIN_COMBINATIONS.each do |combo|
-      converted_combo = combo.collect{ |i| self.board.cells[i] }
+      converted_combo = combo.collect{ |i| board.cells[i] }
       if converted_combo.all?{|cell| cell == "X"} || converted_combo.all?{|cell| cell == "O"}
         winner = combo 
       end
@@ -74,12 +86,12 @@ class Game
 
   #are all the spaces full without a winning combination?
   def draw?
-    !self.won? && self.board.full?
+    !won? && board.full?
   end
 
   #game over?
   def over?
-    self.won? || self.draw?
+    won? || draw?
   end
 
   # checks to see who is the winner, returns X, O, or nil
@@ -87,28 +99,28 @@ class Game
   # use won? (returns the winning combo from WIN_COMBINATIONS) to index into board cells
   # else nil 
   def winner
-    self.won? ? self.board.cells[self.won?[0]] : nil 
+    won? ? board.cells[won?[0]] : nil 
   end
 
   def turn
-    move = self.current_player.move(self.board)
-    until self.board.valid_move?(move)
-      move = self.current_player.move(self.board)
+    move = current_player.move(board)
+    until board.valid_move?(move)
+      move = current_player.move(board)
     end
-    self.board.update(move, self.current_player)
+    board.update(move, current_player)
   end
     
 
   def play
-    until self.over?
-      self.board.display
-      self.turn
+    until over?
+      board.display
+      turn
     end
-    if self.won?
-      self.board.display
-      puts "Congratulations #{self.winner}!"
+    if won?
+      board.display
+      puts "Congratulations #{winner}!"
     else
-      self.board.display
+      board.display
       puts "Cat's Game!"
     end
   end
