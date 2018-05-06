@@ -26,7 +26,19 @@ class Game
       puts "Welcome to TicTacToe!"
       puts "How many players?"
       player_num = choose_player 
-      initiate_players(player_num)
+      if player_num == "0"
+        game = Game.new(player_1=Players::Computer.new('X'), player_2=Players::Computer.new('O'))
+      elsif player_num == "1"
+        puts "Who will go first? Press c for the computer or h for human."
+          player1 = gets.chomp 
+        if player1 == 'c'
+       game = Game.new(player_1=Players::Computer.new('X'), player_2=Players::Human.new('O'))
+      else 
+        game = Game.new(player_1=Players::Human.new('X'), player_2=Players::Computer.new('O'))
+      end
+    else 
+      game = Game.new 
+    end
       puts "Let's play!"
       game.play 
       puts "Nice job! Would you like to play again? y/n"
@@ -48,21 +60,6 @@ class Game
     end
     player_num
   end
-  
-  def initiate_players(player_num)  
-    if player_num == "0"
-      game = Game.new(player_1=Players::Computer.new('X'), player_2=Players::Computer.new('O'))
-    elsif player_num == "1"
-      puts "Who will go first? Press c for the computer or h for human."
-      player1 = gets.chomp 
-      if player1 == 'c'
-       game = Game.new(player_1=Players::Computer.new('X'), player_2=Players::Human.new('O'))
-      else 
-        game = Game.new(player_1=Players::Human.new('X'), player_2=Players::Computer.new('O'))
-      end
-    else 
-      game = Game.new 
-    end 
       
   # returns currently player based on number of turns already taken 
   # board object tracks turns already taken 
