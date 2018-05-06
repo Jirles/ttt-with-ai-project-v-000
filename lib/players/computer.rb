@@ -3,17 +3,24 @@ module Players
 
   class Computer < Player
     
-    attr_accessor :cheat_sheet 
     attr_reader :token, :level_of_difficulty, :opponent_token
     
    # WIN_HASH = {"1"=>3, "2"=>2, "3"=>3, "4"=>2, "5"=>4, "6"=>2, "7"=>3, "8"=>2, "9"=>3}
-    WIN_COMBINATIONS = 
+    WIN_COMBINATIONS = [
+    [0,1,2], #top row
+    [3,4,5], #mid row
+    [6,7,8], #bot row
+    [0,3,6], #left col
+    [1,4,7], #mid col
+    [2,5,8], #right col
+    [0,4,8], #l>r diag
+    [2,4,6]  #r>l diag
+  ]
+
     CENTER = "5"
     CORNERS = ["1", "3", "7", "9"]
 
     def initialize(level_of_difficulty=2, token)
-      @cheat_sheet = [["1","2","3"], ["4","5","6"], ["7","8","9"], ["1","4","7"], ["2","5","8"], ["3","6","9"], ["1","5","9"], ["3","5","7"]] #=> copy of WIN_COMBINATIONS but as valid moves 
-      
       #determines if you play stupid computer (random sampling) or ai 
       @level_of_difficulty = level_of_difficulty
       @token = token 
@@ -34,23 +41,11 @@ module Players
     
     # begin smart computer (2) methods - not passing tests
     
-    def update_cheat_sheet(board)
-      #iterate over cheat_sheet
-      cheat_sheet.collect do |combo|
-        # go through each combo so we can look at each string (move) in the combo array
-        combo.collect do |move|
-          
-          # that move once converted to an integer and subtracted 1 becomes an index
-            index = move.to_i - 1
-            
-          # the index can be used to access the board.cells property to find out what is present
-          # if there is nothing, i.e. " " at board.cells[index]
+    def create_cheat_sheet(board)
+        WIN_COMBINATIONS.collect do |combo|
+        combo.collect do |index|
           if board.cells[index] == " "
-            
-            # then nothing happens to that string
-            move 
-            
-          # else that string is replaced by board.cells[index] ("X" or "O")
+            (index + 1).to_s
           else
             board.cells[index] 
           end 
