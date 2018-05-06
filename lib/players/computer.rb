@@ -65,6 +65,7 @@ module Players
             
           end
         end
+      end
     end
     
     def choose_best_move(hash)
