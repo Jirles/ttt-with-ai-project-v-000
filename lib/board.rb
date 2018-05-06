@@ -4,12 +4,12 @@ class Board
   #data and logic of the tictactoe board, stores state of board
   
   def initialize
-    @cells = Array.new(9, " ")
+    @cells = reset!
   end
   
   #reset! clears the board
   def reset!
-    cells = Array.new(9, " ")
+    self.cells = Array.new(9, " ")
   end
   
   #displays board using @cells array
