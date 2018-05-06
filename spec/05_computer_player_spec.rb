@@ -22,7 +22,7 @@ describe 'Players::Computer' do
   end
 
   describe '#create_cheat_sheet' do
-    it 'creates a cheat_sheet by filling in occupied spaces with the appropriate token' do
+    it 'creates a cheat_sheet from WIN_COMBINAtIONS and the current board' do
       board.cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "]
       turn1 = [["1","2","3"], 
                ["4","X","6"], 
@@ -33,7 +33,7 @@ describe 'Players::Computer' do
                ["1","X","9"], 
                ["3","X","7"]]
       
-      expect(computer.update_cheat_sheet(board)).to eq(turn1)
+      expect(computer.create_cheat_sheet(board)).to eq(turn1)
       
       board.cells = [" ", " ", "O", " ", "X", " ", " ", " ", " "]
       turn2 = [["1","2","O"], 
@@ -45,31 +45,7 @@ describe 'Players::Computer' do
                ["1","X","9"], 
                ["O","X","7"]]
       
-      expect(computer.update_cheat_sheet(board)).to eq(turn2)
-      
-      board.cells = [" ", " ", "O", " ", "X", "X", " ", " ", " "]
-      turn3 = [["1","2","O"], 
-                ["4","X","X"], 
-                ["7","8","9"], 
-                ["1","4","7"], 
-                ["2","X","8"], 
-                ["O","X","9"], 
-                ["1","X","9"], 
-                ["O","X","7"]]
-      
-      expect(computer.update_cheat_sheet(board)).to eq(turn3)
-      
-      board.cells = [" ", " ", "O", "O", "X", "X", " ", " ", " "]
-      turn4 = [["1","2","O"], 
-                ["O","X","X"], 
-                ["7","8","9"], 
-                ["1","O","7"], 
-                ["2","X","8"], 
-                ["O","X","9"], 
-                ["1","X","9"], 
-                ["O","X","7"]]
-      
-      expect(computer.update_cheat_sheet(board)).to eq(turn4)
+      expect(computer.create_cheat_sheet(board)).to eq(turn2)
       
       board.cells = [" ", " ", "O", "O", "X", "X", " ", " ", "X"]
       turn5 = [["1","2","O"], 
@@ -81,19 +57,7 @@ describe 'Players::Computer' do
                 ["1","X","X"], 
                 ["O","X","7"]]
       
-      expect(computer.update_cheat_sheet(board)).to eq(turn5)
-      
-      board.cells = [" ", "X", "O", "O", "X", "X", " ", " ", "X"]
-      turn6 = [["1","X","O"], 
-                ["O","X","X"], 
-                ["7","8","X"], 
-                ["1","O","7"], 
-                ["X","X","8"], 
-                ["O","X","X"], 
-                ["1","X","X"], 
-                ["O","X","7"]]
-      
-      expect(computer.update_cheat_sheet(board)).to eq(turn6)
+      expect(computer.create_cheat_sheet(board)).to eq(turn5)
       
       board.cells = ["O", "X", "O", "O", "X", "X", " ", " ", "X"]
       turn7 = [["O","X","O"], 
@@ -105,37 +69,14 @@ describe 'Players::Computer' do
                 ["O","X","X"], 
                 ["O","X","7"]]
       
-      expect(computer.update_cheat_sheet(board)).to eq(turn7)
+      expect(computer.create_cheat_sheet(board)).to eq(turn7)
       
-      board.cells = ["O", "X", "O", "O", "X", "X", " ", "O", "X"]
-      turn8 = [["O","X","O"], 
-                ["O","X","X"], 
-                ["7","O","X"], 
-                ["O","O","7"], 
-                ["X","X","O"], 
-                ["O","X","X"], 
-                ["O","X","X"], 
-                ["O","X","7"]]
-      
-      expect(computer.update_cheat_sheet(board)).to eq(turn8)
-      
-      board.cells = ["O", "X", "O", "O", "X", "X", "X", "O", "X"]
-      turn9 = [["O","X","O"], 
-                ["O","X","X"], 
-                ["X","O","X"], 
-                ["O","O","X"], 
-                ["X","X","O"], 
-                ["O","X","X"], 
-                ["O","X","X"], 
-                ["O","X","X"]]
-                
-      expect(computer.update_cheat_sheet(board)).to eq(turn9)
     end
   end
   
   describe "#win_imminent?" do 
     it "it returns an array where there are two tokens and an empty space" do 
-      computer.cheat_sheet = [["1","2","O"], 
+      cheat_sheet = [["1","2","O"], 
                      ["O","X","X"], 
                      ["X","8","9"], 
                      ["1","O","X"], 
@@ -146,9 +87,9 @@ describe 'Players::Computer' do
       
       win_array = ["3", "X", "X"]
       
-      expect(computer.win_imminent?).to eq(win_array)
+      expect(computer.win_imminent?(cheat_sheet)).to eq(win_array)
       
-      computer.cheat_sheet = [["1","2","O"], 
+      cheat_sheet = [["1","2","O"], 
                      ["O","X","X"], 
                      ["X","8","9"], 
                      ["1","O","X"], 
@@ -159,10 +100,10 @@ describe 'Players::Computer' do
       
       win_array = ["X", "2", "X"]
       
-      expect(computer.win_imminent?).to eq(["X", "2", "X"])
+      expect(computer.win_imminent?(cheat_sheet)).to eq(["X", "2", "X"])
       
       computer_o = Players::Computer.new("O")
-      computer.cheat_sheet = [["1","2","O"], 
+      cheat_sheet = [["1","2","O"], 
                      ["O","3","6"], 
                      ["X","8","9"], 
                      ["1","O","O"], 
@@ -171,11 +112,11 @@ describe 'Players::Computer' do
                      ["1","X","9"], 
                      ["3","O","X"]]
                      
-      expect(computer_o.win_imminent?).to eq(["1", "O", "O"])
+      expect(computer_o.win_imminent?(cheat_sheet)).to eq(["1", "O", "O"])
     end
     
     it "returns nil if no winning array is found" do 
-       computer.cheat_sheet = [["1","2","O"], 
+       cheat_sheet = [["1","2","O"], 
                      ["O","X","X"], 
                      ["X","8","9"], 
                      ["1","O","X"], 
@@ -184,13 +125,13 @@ describe 'Players::Computer' do
                      ["1","X","9"], 
                      ["3","O","X"]]
           
-        expect(computer.win_imminent?).to be_falsey 
+        expect(computer.win_imminent?(cheat_sheet)).to be_falsey 
       end
     end
     
   describe "#block?" do 
     it "returns an array where there are two opponent's tokens and an empty space" do
-      computer.cheat_sheet = [["1","2","O"], 
+      cheat_sheet = [["1","2","O"], 
                      ["O","X","O"], 
                      ["X","8","9"], 
                      ["1","O","O"], 
@@ -199,12 +140,10 @@ describe 'Players::Computer' do
                      ["1","X","9"], 
                      ["3","O","X"]]
       
-      block_array = ["1", "O", "O"]
-      
-      expect(computer.block?).to match_array(block_array)
+      expect(computer.block?(cheat_sheet)).to match_array(["1", "O", "O"])
       
       
-      computer.cheat_sheet = [["1","2","O"], 
+      cheat_sheet = [["1","2","O"], 
                      ["O","5","O"], 
                      ["X","8","9"], 
                      ["1","X","O"], 
@@ -213,20 +152,18 @@ describe 'Players::Computer' do
                      ["1","X","9"], 
                      ["3","O","X"]]
       
-      block_array = ["O", "5", "O"]
-      
-      expect(computer.block?).to match_array(block_array)
+      expect(computer.block?(cheat_sheet)).to match_array(["O", "5", "O"])
       
       computer2 = Players::Computer.new("O")
       board.cells = ["X", " ", "O", " ", "X", " ", " ", " ", " "]
-      cheat_sheet = computer2.update_cheat_sheet(board)
+      cheat_sheet = computer2.create_cheat_sheet(board)
       
-      expect(computer2.block?).to eq(["X","X","9"])
+      expect(computer2.block?(cheat_sheet)).to eq(["X","X","9"])
     end
     it "returns nil if no block combination is detected" do 
-      computer.cheat_sheet = [["1","2","O"], ["O","5","8"], ["X","8","9"], ["1","X","O"], ["X","2","4"], ["O","X","9"], ["1","X","9"], ["3","O","X"]]
+      cheat_sheet = [["1","2","O"], ["O","5","8"], ["X","8","9"], ["1","X","O"], ["X","2","4"], ["O","X","9"], ["1","X","9"], ["3","O","X"]]
     
-      expect(computer.block?).to be_falsey
+      expect(computer.block?(cheat_sheet)).to be_falsey
     end
   end
 
