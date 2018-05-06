@@ -28,6 +28,8 @@ class Game
       player_num = choose_player 
       if player_num == "0"
         game = Game.new(player_1=Players::Computer.new('X'), player_2=Players::Computer.new('O'))
+      elsif player_num = "wargames"
+        
       elsif player_num == "1"
         puts "Who will go first? Press c for the computer or h for human."
         player1 = gets.chomp 
@@ -50,7 +52,7 @@ class Game
   
   # #Game.start helper methods 
   def choose_player
-    valid_choices = ["0", "1", "2"]
+    valid_choices = ["0", "1", "2", "wargames"]
     player_num = "-1"
     puts "How many players?"
     until valid_choices.include?(player_num)
