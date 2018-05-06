@@ -105,10 +105,10 @@ class Game
       self.turn
     end
     if self.won?
-      board.display
+      self.board.display
       puts "Congratulations #{self.winner}!"
     else
-      board.display
+      self.board.display
       puts "Cat's Game!"
     end
   end
