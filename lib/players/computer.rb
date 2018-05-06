@@ -81,14 +81,14 @@ module Players
     end
     
     def ai_move(board)
-      cheat_sheet = update_cheat_sheet(board)
+      create_cheat_sheet(board)
       if board.turn_count == 0 || board.turn_count == 1
         first_move(board)
       else
-        if win_imminent?
-            win_imminent?.detect{|x| x != token}
-        elsif block? 
-            block?.detect{|x| x != opponent_token}
+        if win_imminent?(cheat_sheet)
+            win_imminent?(cheat_sheet).detect{|x| x != token}
+        elsif block?(cheat_sheet) 
+            block?(cheat_sheet).detect{|x| x != opponent_token}
         else
             random_move(board)
         end
