@@ -23,7 +23,6 @@ class Game
   def self.start
     play = true 
     while play
-      puts "Welcome to TicTacToe!"
       puts "How many players?"
       player_num = choose_player 
       if player_num == "0"
