@@ -180,8 +180,6 @@ describe 'Players::Computer' do
     it "if not the first turn, it first checks for a win through #win_imminent? and returns a valid move" do
       board.cells = ["X", " ", "O", "O", "X", " ", " ", " ", " "]
       
-      computer.cheat_sheet = computer.update_cheat_sheet(board)
-      
       expect(computer.ai_move(board)).to eq("9")
     end
     
