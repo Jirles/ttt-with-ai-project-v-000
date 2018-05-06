@@ -116,4 +116,4 @@ end
 computer = Players::Computer.new("O")
 board = Board.new
 board.cells = [" ", " ", "O", " ", "X", "X", " ", " ", " "]
-ai_move(board)
+computer.ai_move(board)
