@@ -5,7 +5,8 @@ module Players
     
     attr_reader :token, :level_of_difficulty, :opponent_token
     
-   # WIN_HASH = {"1"=>3, "2"=>2, "3"=>3, "4"=>2, "5"=>4, "6"=>2, "7"=>3, "8"=>2, "9"=>3}
+   WIN_COUNTS = {0=>3, 1=>2, 2=>3, 3=>2, 4=>4, 5=>2, 6=>3, 7=>2, 8=>3}
+   
     WIN_COMBINATIONS = [
     [0,1,2], #top row
     [3,4,5], #mid row
@@ -56,7 +57,13 @@ module Players
         end 
       end 
     end 
-
+    
+    def create_updated_win_hash(board)
+      WIN_COUNTS.collect do |k, v|
+        if board.cells[k] == " "
+      end
+    end
+    
     def choose_best_move(hash)
       max_moves = 0
       best_available = 0
