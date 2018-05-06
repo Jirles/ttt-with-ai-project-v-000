@@ -48,6 +48,22 @@ class Game
     puts "Buh bye!"
   end
   
+  def self.war
+    war_log = {x: 0, o: 0, cat: 0}
+    3.times do
+      game = Game.new(player_1=Players::Computer.new('X'), player_2=Players::Computer.new('O'))
+      until game.over?
+        game.turn
+      end
+      if game.won?
+        war_log[winner.downcase.to_sym] += 1
+      else
+        war_log[:cat] += 1
+      end
+    end
+    puts war_log
+  end
+  
   # #Game.start helper methods 
   def choose_player
     valid_choices = ["0", "1", "2", "wargames"]
