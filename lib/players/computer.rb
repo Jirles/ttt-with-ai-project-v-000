@@ -3,7 +3,7 @@ module Players
 
   class Computer < Player
     
-    attr_reader :token, 
+    attr_reader :token, :opponent_token 
    
     WIN_COUNTS = {0=>3, 1=>2, 2=>3, 3=>2, 4=>4, 5=>2, 6=>3, 7=>2, 8=>3}
    
