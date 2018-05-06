@@ -2,5 +2,7 @@
 
 require_relative '../config/environment'
 
-puts "Please choose
+puts "Welcome to TicTacToe!"
+puts "Would you to like to play multi-player mode?"
+puts "or 
 Game.start 
