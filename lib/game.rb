@@ -48,7 +48,7 @@ class Game
   end
   
   def self.war
-    war_quotes = ["Cry 'Havoc!', and let slip the dogs of war. -Shakespeare, Julius Caesar", "The two most powerful warriors are patience and time. -Leo Tolstoy", "You must not fight too often with one enemy, or you will teach him all your art of war. -Napolean Bonaparte", "The supreme art of war is to subdue the enemy without fighting. -Sun Tzu", "To be prepared for war is "]
+    war_quotes = ["Cry 'Havoc!', and let slip the dogs of war. -Shakespeare, Julius Caesar", "The two most powerful warriors are patience and time. -Leo Tolstoy", "You must not fight too often with one enemy, or you will teach him all your art of war. -Napolean Bonaparte", "The supreme art of war is to subdue the enemy without fighting. -Sun Tzu", "To be prepared for war is one of the most effective ways of preserving peace. -George Washington"]
     war_log = {x: 0, o: 0, cat: 0}
     3.times do
       game = Game.new(player_1=Players::Computer.new('X'), player_2=Players::Computer.new('O'))
