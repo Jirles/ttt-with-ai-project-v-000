@@ -125,7 +125,7 @@ class Game
     end
   end
   
-  def war
+  def self.war
     war_log = {x: 0, o: 0, cat: 0}
     3.times do
       game = Game.new(player_1=Players::Computer.new('X'), player_2=Players::Computer.new('O'))
@@ -138,7 +138,7 @@ class Game
         war_log[:cat] += 1
       end
     end
-    war_log
+    puts war_log
   end
 
 end
