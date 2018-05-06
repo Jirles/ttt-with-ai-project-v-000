@@ -61,6 +61,7 @@ class Game
         war_log[:cat] += 1
       end
     end
+    puts war_quotes.sample
     puts war_log
   end
   
