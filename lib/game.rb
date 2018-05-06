@@ -122,5 +122,19 @@ class Game
       puts "Cat's Game!"
     end
   end
+  
+  def war
+    war_log = {x: 0, o: 0, cat: 0}
+    10.times do 
+      until over?
+        turn
+      end
+      if won?
+      war_log[winner.downcase.to]
+    else
+      war_log[:cat] += 1
+    end
+    war_log
+  end
 
 end
