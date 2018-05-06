@@ -22,7 +22,7 @@ module Players
       #determines if you play stupid computer (random sampling) or ai 
       @token = token 
       case 
-        when self.token ==  "X"
+        when token ==  "X"
           @opponent_token = "O"
         else
           @opponent_token = "X"
